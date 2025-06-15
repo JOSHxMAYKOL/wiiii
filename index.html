@@ -1,23 +1,370 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Dedicatoria</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Feliz Día del Padre - Celebración Animada y Regalo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <style>
+    /* Reset & base */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: #fff;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 16px;
+      position: relative;
+    }
+
+    /* Container with glass morphism */
+    main {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px) saturate(150%);
+      border-radius: 20px;
+      padding: 48px 64px;
+      max-width: 800px;
+      width: 100%;
+      box-shadow: 0 8px 32px rgba(255, 255, 255, 0.15);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+      position: relative;
+      z-index: 10;
+      user-select: none;
+    }
+
+    header {
+      text-align: center;
+      max-width: 600px;
+    }
+
+    h1 {
+      font-weight: 900;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      background: linear-gradient(90deg, #FFD54F, #FFA726);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: glowPulse 3s ease-in-out infinite alternate;
+      margin-bottom: 0.5rem;
+      user-select: text;
+    }
+
+    @keyframes glowPulse {
+      0% {
+        filter: drop-shadow(0 0 0 #f59e0b);
+      }
+      100% {
+        filter: drop-shadow(0 0 12px #f59e0b);
+      }
+    }
+
+    p.subtitle {
+      font-size: 1.25rem;
+      color: #fbe9a7;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      user-select: text;
+    }
+
+    /* Celebration gift icon */
+    .icon-celebration {
+      font-size: 5rem;
+      color: #ffca28;
+      animation: iconFloat 6s ease-in-out infinite;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    @keyframes iconFloat {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-15px) rotate(15deg); }
+    }
+
+    /* Balloons background container (behind content) */
+    .balloons {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      overflow: visible;
+      z-index: 1;
+    }
+
+    .balloon {
+      position: absolute;
+      bottom: -100px;
+      width: 50px;
+      height: 70px;
+      border-radius: 50%;
+      opacity: 0.8;
+      filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.2));
+      animation: riseBalloon linear infinite;
+    }
+    .balloon::before {
+      content: "";
+      position: absolute;
+      bottom: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 15px;
+      background: #555;
+      border-radius: 1px;
+      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.25));
+    }
+
+    /* Balloon colors */
+    .balloon.color1 { background: #f59e0b; }
+    .balloon.color2 { background: #fbbf24; }
+    .balloon.color3 { background: #fde68a; }
+    .balloon.color4 { background: #facc15; }
+    .balloon.color5 { background: #ca8a04; }
+
+    @keyframes riseBalloon {
+      0% { bottom: -100px; opacity: 0; transform: translateX(0) scale(0.8); }
+      10% { opacity: 1; }
+      100% { bottom: 110vh; opacity: 0; transform: translateX(60px) scale(1.1); }
+    }
+
+    /* Floating stars */
+    .star {
+      position: fixed;
+      width: 12px;
+      height: 12px;
+      background: #fbbf24;
+      border-radius: 50%;
+      filter: drop-shadow(0 0 4px #fbbf24);
+      animation: twinkle 4s infinite alternate;
+      opacity: 0.8;
+      z-index: 0;
+    }
+
+    @keyframes twinkle {
+      0% { opacity: 0.2; }
+      100% { opacity: 1; }
+    }
+
+    /* Gift button */
+    .btn-gift {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.25rem;
+      padding: 16px 48px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(245, 158, 11, 0.5);
+      transition: all 0.3s ease;
+      user-select: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-gift:hover,
+    .btn-gift:focus {
+      background: linear-gradient(135deg, #d97706, #b45309);
+      box-shadow: 0 8px 30px rgba(212, 117, 6, 0.8);
+      transform: translateY(-3px) scale(1.05);
+      outline: none;
+    }
+
+    .btn-gift .material-icons {
+      font-size: 1.8rem;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    /* Gallery container hidden by default */
+    #gallery-container {
+      width: 100%;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      user-select: text;
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    /* Grid of 14 images */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(120px,1fr));
+      gap: 20px;
+      width: 100%;
+      max-width: 780px;
+    }
+
+    .gallery-grid img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(255, 215, 0, 0.24);
+      cursor: default;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      filter: drop-shadow(0 0 6px gold);
+    }
+    .gallery-grid img:hover,
+    .gallery-grid img:focus-visible {
+      outline: none;
+      transform: scale(1.07);
+      box-shadow: 0 12px 36px rgba(255, 215, 0, 0.6);
+      z-index: 10;
+      filter: drop-shadow(0 0 14px gold);
+    }
+
+    /* Thank you message */
+    #thank-you-message {
+      font-size: clamp(1.5rem, 2vw, 1.8rem);
+      font-weight: 700;
+      color: #ffeb3b;
+      text-shadow: 0 0 12px #fbc02d;
+      max-width: 700px;
+      padding: 0 12px;
+      text-align: center;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      main {
+        padding: 32px 24px;
+        border-radius: 16px;
+      }
+      h1 {
+        font-size: 2.5rem;
+      }
+      .icon-celebration {
+        font-size: 3.8rem;
+      }
+      .gallery-grid img {
+        height: 100px;
+        border-radius: 12px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="content">
-        <h1>Mi Dedicatoria</h1>
-        <p>Esta es una dedicatoria especial para...</p>
+  <main role="main" aria-labelledby="main-title">
+    <header>
+      <h1 id="main-title" tabindex="0">¡Feliz Día del Padre!</h1>
+      <p class="subtitle">Celebrando a los héroes anónimos de nuestra vida con amor y gratitud.</p>
+    </header>
 
-        <!-- Reproductor de audio -->
-        <audio autoplay loop>
-            <source src="beabadoobee-glue-song.mp3" type="audio/mp3">
-            Tu navegador no soporta el elemento de audio.
-        </audio>
-    </div>
+    <span class="material-icons icon-celebration" aria-hidden="true" title="Icono de celebración: regalo">card_giftcard</span>
 
-    <script src="script.js"></script>
+    <button class="btn-gift" aria-label="Ver regalo especial para papá" type="button" id="show-gallery-btn">
+      <span class="material-icons" aria-hidden="true">visibility</span> Ver regalo especial
+    </button>
+
+    <section id="gallery-container" aria-live="polite" aria-atomic="true">
+      <div class="gallery-grid" role="list">
+        <img src="C:\Users\JOSH\OneDrive\Documentos\GitHub\wiiii\imagenes\Imagen de WhatsApp 2025-06-15 a las 01.38.51_44840a43.jpg" alt="Recuerdo familiar con papá en un parque soleado" role="listitem" tabindex="0" />
+        <img src="C:\Users\JOSH\OneDrive\Documentos\GitHub\wiiii\imagenes\Imagen de WhatsApp 2025-06-15 a las 01.38.51_07134796.jpg" alt="Papá enseñando a su hijo a andar en bicicleta en un día alegre" role="listitem" tabindex="0" />
+        <img src="C:\Users\JOSH\OneDrive\Documentos\GitHub\wiiii\imagenes\Imagen de WhatsApp 2025-06-15 a las 01.38.52_4f93b60d.jpg" alt="Retrato sonriente de papá con expresión cariñosa y cálida" role="listitem" tabindex="0" />
+        <img src="C:\Users\JOSH\OneDrive\Documentos\GitHub\wiiii\imagenes\Imagen de WhatsApp 2025-06-15 a las 01.38.52_5d08f3d8.jpg" alt="Paseo en familia en bicicleta por un sendero rodeado de naturaleza" role="listitem" tabindex="0" />
+        <img src="C:\Users\JOSH\OneDrive\Documentos\GitHub\wiiii\imagenes\Imagen de WhatsApp 2025-06-15 a las 09.22.02_92d0b29f.jpg" alt="Abrazo amoroso de papá y sus hijos en un picnic soleado" role="listitem" tabindex="0" />
+        <img src="C:\Users\JOSH\OneDrive\Documentos\GitHub\wiiii\imagenes\Imagen de WhatsApp 2025-06-15 a las 09.22.02_36280a31.jpg" alt="Barbacoa familiar con risas y juegos al aire libre" role="listitem" tabindex="0" />
+        <img src="C:\Users\JOSH\OneDrive\Documentos\GitHub\wiiii\imagenes\Imagen de WhatsApp 2025-06-15 a las 09.22.02_f4ef35f1.jpg" alt="Día de pesca en lago tranquilo con papá e hijo" role="listitem" tabindex="0" />
+        <img src="C:\Users\JOSH\OneDrive\Documentos\GitHub\wiiii\imagenes\Imagen de WhatsApp 2025-06-15 a las 09.22.03_4eb53929.jpg" alt="Papá ayudando con tareas escolares en una mesa iluminada" role="listitem" tabindex="0" />
+        <img src="C:\Users\JOSH\OneDrive\Documentos\GitHub\wiiii\imagenes\Imagen de WhatsApp 2025-06-15 a las 09.22.03_49f7a2ef.jpg" alt="Risas familiares en casa jugando juegos de mesa" role="listitem" tabindex="0" />
+        <img src="C:\Users\JOSH\OneDrive\Documentos\GitHub\wiiii\imagenes\Imagen de WhatsApp 2025-06-15 a las 09.22.03_49f7a2ef.jpg" alt="Caminata familiar por la montaña con papá" role="listitem" tabindex="0" />
+        <img src="C:\Users\JOSH\OneDrive\Documentos\GitHub\wiiii\imagenes\Imagen de WhatsApp 2025-06-15 a las 09.22.03_273a8be4.jpg" alt="Papá cocinando con los niños en cocina moderna" role="listitem" tabindex="0" />
+        <img src="C:\Users\JOSH\OneDrive\Documentos\GitHub\wiiii\imagenes\Imagen de WhatsApp 2025-06-15 a las 09.22.03_be043276.jpg" alt="Retrato de familia abrazando a papá formando un corazón" role="listitem" tabindex="0" />
+        <img src="C:\Users\JOSH\OneDrive\Documentos\GitHub\wiiii\imagenes\Imagen de WhatsApp 2025-06-15 a las 09.22.04_9fd9f55a.jpg" alt="Juegos al aire libre en el parque con papá e hijos" role="listitem" tabindex="0" />
+        <img src="C:\Users\JOSH\OneDrive\Documentos\GitHub\wiiii\imagenes\Imagen de WhatsApp 2025-06-15 a las 09.22.04_43e88abb.jpg" alt="Foto artística de papá sonriendo en ambiente cálido" role="listitem" tabindex="0" />
+      </div>
+      <p id="thank-you-message" tabindex="0">Feliz Día del Padre
+
+Hoy es un día especial para rendir homenaje al hombre que ha sido nuestro pilar, nuestro ejemplo de fortaleza, amor y sacrificio. Papá, gracias por estar siempre presente, por tu dedicación y por enseñarnos con tu ejemplo lo que significa ser una persona íntegra y responsable.
+
+Hoy, queremos agradecerte desde lo más profundo de nuestros corazones, porque no solo eres nuestro padre, sino también nuestro amigo, nuestro guía y nuestra inspiración. Tu amor incondicional y tu apoyo constante nos han dado las bases para ser mejores cada día. Gracias por tu paciencia, por tus consejos sabios y por estar siempre dispuesto a dar lo mejor de ti.
+
+En este Día del Padre, celebramos tu vida, tu esfuerzo y tu amor. Gracias por ser la figura que siempre nos da esperanza y confianza. Te amamos y estamos muy agradecidos por todo lo que haces por nuestra familia.
+
+¡Feliz Día del Padre!
+
+Con todo el amor de tu familia. 
+PARA PEPE PEREZ GUTIERREZ </p>
+    </section>
+  </main>
+
+  <div class="balloons" aria-hidden="true"></div>
+
+  <script>
+    // Balloon colors setup
+    const BALLOON_COLORS = ['color1', 'color2', 'color3', 'color4', 'color5'];
+    const balloonsContainer = document.querySelector('.balloons');
+
+    function createBalloon(index) {
+      const balloon = document.createElement('div');
+      balloon.className = 'balloon ' + BALLOON_COLORS[index % BALLOON_COLORS.length];
+      balloon.style.left = `${Math.random() * 100}vw`;
+      balloon.style.animationDuration = `${8 + Math.random() * 8}s`;
+      balloon.style.animationDelay = `${-Math.random() * 16}s`;
+      balloon.style.width = `${40 + Math.random() * 30}px`;
+      balloon.style.height = `${(40 + Math.random() * 30) * 1.4}px`;
+      return balloon;
+    }
+
+    for(let i = 0; i < 30; i++) {
+      balloonsContainer.appendChild(createBalloon(i));
+    }
+
+    // Floating stars
+    const STAR_COUNT = 25;
+    for(let i = 0; i < STAR_COUNT; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.top = `${Math.random() * 100}vh`;
+      star.style.left = `${Math.random() * 100}vw`;
+      const size = 6 + Math.random() * 10;
+      star.style.width = size + 'px';
+      star.style.height = size + 'px';
+      star.style.animationDelay = `${Math.random() * 4}s`;
+      star.style.animationDuration = `${3 + Math.random() * 3}s`;
+      balloonsContainer.appendChild(star);
+    }
+
+    // Handle button click to reveal gallery and message
+    const btnGift = document.getElementById('show-gallery-btn');
+    const galleryContainer = document.getElementById('gallery-container');
+
+    btnGift.addEventListener('click', () => {
+      btnGift.disabled = true;
+      btnGift.style.opacity = 0;
+      setTimeout(() => {
+        btnGift.style.display = 'none';
+        galleryContainer.style.display = 'flex';
+        galleryContainer.focus();
+      }, 300);
+    });
+  </script>
 </body>
 </html>
+
